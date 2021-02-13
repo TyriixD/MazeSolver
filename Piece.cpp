@@ -15,15 +15,19 @@ namespace TP1
 	//Mettez l'implémentation de vos méthodes ici.
 
 
-    Piece::Piece() {
+    Piece::Piece(): parcourue(false), nom(""){
 
     }
 
-    Piece::Piece(const std::string &s): nom(s) {
+    Piece::Piece(const std::string &s): parcourue(false), nom(s) {
+
+
 
     }
 
-    Piece::Piece(const Piece &source) { //TODO
+    Piece::Piece(const Piece &source): parcourue(source.parcourue),
+                                        nom(source.nom),
+                                        portes(source.portes) {
 
     }
 
@@ -32,18 +36,28 @@ namespace TP1
     }
 
     const Piece &Piece::operator=(const Piece &source) {
-        return *this;; //TODO
+        if (this != &source){
+            delete &portes;
+            parcourue = source.parcourue;
+            nom = source.nom;
+            portes = source.portes;
+
+        }
+        return *this;;
+
     }
 
     std::string Piece::getNom() const {
         return nom;
     }
 
-    void Piece::setParcourue(bool p) { //TODO
+    void Piece::setParcourue(bool p) {
+        parcourue = p;
 
     }
 
-    void Piece::setDistanceDuDebut(int d) { //TODO
+    void Piece::setDistanceDuDebut(int d) {
+        distanceDuDebut = d;
 
     }
 
@@ -55,8 +69,8 @@ namespace TP1
         return portes;
     }
 
-    int Piece::getDistanceDuDebut() const { //TODO
-        return 0;
+    int Piece::getDistanceDuDebut() const {
+        return distanceDuDebut;
     }
 
     void Piece::ajoutePorte(const Porte &p) {
