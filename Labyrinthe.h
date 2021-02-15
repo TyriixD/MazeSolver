@@ -31,16 +31,16 @@ class Labyrinthe
 {
 public:
 	//Constructeur par défaut
-	Labyrinthe(); //TODO
+	Labyrinthe();
 
 	//constructeur de copie
-	Labyrinthe(const Labyrinthe& source); //TODO
+	Labyrinthe(const Labyrinthe& source);
 
 	//Destructeur
-	~Labyrinthe(); //TODO
+	~Labyrinthe();
 
 	//Surcharge de l'opérateur =
-	const Labyrinthe& operator =(const Labyrinthe& source); //TODO
+	const Labyrinthe& operator =(const Labyrinthe& source);
 
 	//Méthode fournie dans le fichier Labyrinthe.cpp, elle charge
 	//un fichier contenant un labyrinthe d'une certaine couleur
@@ -83,7 +83,7 @@ public:
 	//			mettre ce champ à false pour toutes les pièces du labyrinthe.
 	//
 	//	Tant qu'il reste des pièces dans la file et que la pièce d'arrivée n'a pas encore été atteinte (défilée).
-	int solutionner(Couleur joueur); //TODO
+	int solutionner(Couleur joueur);
 
 	//Cette méthode devra appeler quatre fois la méthode solutionner(), une fois par couleur, pour déterminer
 	//quel est le joueur qui peut solutionner le labyrinthe en le moins de déplacements. Si aucun joueur ne peut
@@ -111,11 +111,10 @@ private:
 	//Méthode privée, elle sert pour charger un labyrinthe. Ajuste le pointeur depart d'un labyrinthe
 	//pour qu'il contienne l'adresse de la pièce correspondant au nom spécifié par nom. Lancer une
 	//exception logic_error si aucune pièce du labyrinthe ne porte le nom nom.
-	void placeDepart(const std::string& nom); //TODO
+	void placeDepart(const std::string& nom);
 
 	//Même chose que pour la fonction placeDepart décrite plus haut, mais pour le pointeur arrivee d'un labyrinthe.
-	void placeArrivee(const std::string& nom); //TODO
-
+	void placeArrivee(const std::string& nom);
 	class NoeudListePieces //noeud typique d'une liste chaînée circulaire
 	{
 		public:

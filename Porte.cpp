@@ -33,7 +33,6 @@ namespace TP1
     }
 
     Porte::~Porte() {
-        delete destination;
 
     }
 

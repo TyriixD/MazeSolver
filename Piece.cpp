@@ -27,20 +27,19 @@ namespace TP1
 
     Piece::Piece(const Piece &source): parcourue(source.parcourue),
                                         nom(source.nom),
-                                        portes(source.portes) {
+                                        portes(source.portes),
+                                        distanceDuDebut(source.distanceDuDebut) {
 
     }
 
-    Piece::~Piece() {
-
-    }
+    Piece::~Piece() {}
 
     const Piece &Piece::operator=(const Piece &source) {
         if (this != &source){
-            delete &portes;
             parcourue = source.parcourue;
             nom = source.nom;
             portes = source.portes;
+            distanceDuDebut = source.distanceDuDebut;
 
         }
         return *this;;

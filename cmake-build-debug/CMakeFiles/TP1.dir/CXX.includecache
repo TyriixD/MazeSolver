@@ -6,7 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/etudiant/ClionProjects/TP1/Piece.cpp
+/home/etudiant/ClionProjects/TP1/Labyrinthe.cpp
+Labyrinthe.h
+/home/etudiant/ClionProjects/TP1/Labyrinthe.h
+
+/home/etudiant/ClionProjects/TP1/Labyrinthe.h
+iostream
+-
+fstream
+-
+sstream
+-
+string
+-
+queue
+-
+Porte.h
+/home/etudiant/ClionProjects/TP1/Porte.h
 Piece.h
 /home/etudiant/ClionProjects/TP1/Piece.h
 
