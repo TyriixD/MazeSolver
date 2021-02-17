@@ -15,7 +15,7 @@ namespace TP1
 
 	//Mettez l'implémentation de vos méthodes ici.
 
-    Porte::Porte(): color(Aucun){
+    Porte::Porte(): color(Aucun), destination(0){
 
     }
 

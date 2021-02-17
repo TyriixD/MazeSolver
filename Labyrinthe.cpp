@@ -250,7 +250,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
           fileDePieces.pop();
 
           for (iterateur = pieceCourante.getPortes().begin(); iterateur != pieceCourante.getPortes().end(); ++iterateur){
-              if (iterateur->getCouleur() == joueur && iterateur->getDestination()->getParcourue() == false && *(iterateur->getDestination()) == pieceCourante) {
+              if (iterateur->getCouleur() == joueur && !iterateur->getDestination()->getParcourue() && *(iterateur->getDestination()) == pieceCourante) {
                   iterateur->getDestination()->setParcourue(true);
                   iterateur->getDestination()->setDistanceDuDebut(pieceCourante.getDistanceDuDebut() +1);
                   fileDePieces.push(*(iterateur->getDestination()));
