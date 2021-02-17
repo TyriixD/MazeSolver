@@ -15,11 +15,11 @@ namespace TP1
 	//Mettez l'implémentation de vos méthodes ici.
 
 
-    Piece::Piece(): parcourue(false), nom(""){
+    Piece::Piece(): parcourue(false), nom(""), distanceDuDebut(0){
 
     }
 
-    Piece::Piece(const std::string &s): parcourue(false), nom(s) {
+    Piece::Piece(const std::string &s): parcourue(false), nom(s), distanceDuDebut(0) {
 
 
 
@@ -79,6 +79,18 @@ namespace TP1
     Piece* Piece::clone() const{
         return new Piece(*this);
 
+    }
+
+    bool Piece::operator==(const Piece &source) {
+        bool valeurDeRetour;
+        if (portes == source.portes && parcourue == source.parcourue && nom == source.nom)
+        {
+            valeurDeRetour = true;
+        }
+        else {
+            valeurDeRetour = false;
+        }
+        return valeurDeRetour;
     }
 
 }

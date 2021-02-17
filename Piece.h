@@ -63,6 +63,10 @@ public:
 	//Clone
 	Piece* clone() const;
 
+	bool operator ==(const Piece& source);
+
+
+
 
 
 private:

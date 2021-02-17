@@ -240,13 +240,53 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 
     int Labyrinthe::solutionner(Couleur joueur) {
       queue<Piece> fileDePieces;
-      return 1;
+      depart->setDistanceDuDebut(0);
+      fileDePieces.push(*depart);
+
+
+      list<Porte>:: const_iterator iterateur;
+      while(!fileDePieces.empty()){
+          Piece pieceCourante = fileDePieces.front();
+          fileDePieces.pop();
+
+          for (iterateur = pieceCourante.getPortes().begin(); iterateur != pieceCourante.getPortes().end(); ++iterateur){
+              if (iterateur->getCouleur() == joueur && iterateur->getDestination()->getParcourue() == false && *(iterateur->getDestination()) == pieceCourante) {
+                  iterateur->getDestination()->setParcourue(true);
+                  iterateur->getDestination()->setDistanceDuDebut(pieceCourante.getDistanceDuDebut() +1);
+                  fileDePieces.push(*(iterateur->getDestination()));
+
+              }
+
+          }
+      }
+        return arrivee->getDistanceDuDebut();
+
 
     }
 
     Couleur Labyrinthe::trouveGagnant() {
-        return Aucun;
-        //TODO
+       int bleu = solutionner(Bleu);
+       int rouge = solutionner(Rouge);
+       int jaune =solutionner(Jaune);
+       int vert = solutionner(Vert);
+       Couleur couleurDuGagnant;
+
+       if (bleu > rouge && bleu > jaune && bleu > vert){
+           couleurDuGagnant = Bleu;
+       }
+
+       if (rouge > bleu && rouge > jaune && rouge >vert){
+           couleurDuGagnant = Rouge;
+       }
+
+       if (jaune > bleu && jaune > rouge && jaune > vert){
+           couleurDuGagnant = Jaune;
+       }
+       if (vert > bleu && vert > rouge && vert > jaune){
+           couleurDuGagnant = Vert;
+       }
+       return couleurDuGagnant;
+
     }
 
     bool Labyrinthe::appartient(const Piece &p) const {
@@ -261,7 +301,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
             noeudCourant = noeudCourant->suivant;
 
         }
-        while (noeudCourant != dernier && valeurDeRetour ==false);
+        while (noeudCourant != dernier && !valeurDeRetour);
         return valeurDeRetour;
 
 
@@ -277,7 +317,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
     void Labyrinthe::placeArrivee(const string &nom) {
         NoeudListePieces* noeudDepieceCherche =  trouvePiece(nom);
         arrivee = &(noeudDepieceCherche->piece);
-        
+
 
         }
     Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(const string &nom) const {
