@@ -130,7 +130,7 @@ private:
 	//qui correspond à la pièce portant le nom nom, la méthode doit lancer une exception invalid_argument si le nom de
 	//la pièce est vide. La méthode doit lancer également une exception logic_error si la pièce est introuvable.
 	//Remarquez qu'il faut retourner l'adresse du noeud et non l'adresse de la pièce.
-	NoeudListePieces * trouvePiece(const std::string &nom) const; //TODO
+	NoeudListePieces * trouvePiece(const std::string &nom) const;
 
 	//
 	NoeudListePieces *dernier; /*!< Le dernier noeud de la liste chaînée circulaire.*/

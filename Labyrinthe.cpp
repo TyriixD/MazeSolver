@@ -208,6 +208,9 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
             noeud->suivant = dernier->suivant;
             dernier->suivant = noeud;
         }
+        else {
+            delete noeud;
+        }
     }
 
     Labyrinthe::Labyrinthe() {
@@ -237,6 +240,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 
     int Labyrinthe::solutionner(Couleur joueur) {
       queue<Piece> fileDePieces;
+      return 1;
 
     }
 
@@ -246,73 +250,64 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
     }
 
     bool Labyrinthe::appartient(const Piece &p) const {
-        //TODO A FIXER ET UTILISER TROUVER PIECE
-        NoeudListePieces* courant = new NoeudListePieces();
         bool valeurDeRetour = false;
-        do {
-            if (courant->piece.getNom() == p.getNom()) {
+        NoeudListePieces* noeudCourant = dernier;
+
+        do{
+            if (noeudCourant->piece.getNom() == p.getNom()){
                 valeurDeRetour = true;
             }
-            courant = courant->suivant;
-        }
-        while (courant != dernier);
-        delete courant;
 
+            noeudCourant = noeudCourant->suivant;
+
+        }
+        while (noeudCourant != dernier && valeurDeRetour ==false);
         return valeurDeRetour;
+
 
     }
 
     void Labyrinthe::placeDepart(const string &nom) {
-        NoeudListePieces* courant = dernier->suivant;
+        NoeudListePieces* noeudDepieceCherche =  trouvePiece(nom);
+        depart = &(noeudDepieceCherche->piece);
 
-        do {
-            if (courant->piece.getNom() == nom){
-                depart = &courant->piece;
-            }
-            if (courant == dernier && courant->piece.getNom() != dernier->piece.getNom()){
-                throw logic_error("Aucune pièce de ce nom fait partie du labyrinthe");
-            }
-
-        }
-        while (courant != dernier);
-        delete courant;
 
     }
 
     void Labyrinthe::placeArrivee(const string &nom) {
-        NoeudListePieces* courant = dernier->suivant;
-
-        do {
-            if (courant->piece.getNom() == nom){
-                arrivee = &courant->piece;
-            }
-            else {
-                throw logic_error("Aucune pièce de ce nom fait partie du labyrinthe");
-            }
-
-        }
-        while (courant != dernier->suivant);
-        delete courant;
-
+        NoeudListePieces* noeudDepieceCherche =  trouvePiece(nom);
+        arrivee = &(noeudDepieceCherche->piece);
+        
 
         }
     Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(const string &nom) const {
         if (nom == "") {
             throw invalid_argument("Le nom de la pièce est invalide");
         }
-        NoeudListePieces* courant = dernier->suivant;
+        NoeudListePieces* noeudCourant = dernier;
+
         do {
-            if (courant->piece.getNom() == nom){
-                return courant;
+            if (noeudCourant->piece.getNom() == nom){
+                return noeudCourant;
             }
 
+                noeudCourant = noeudCourant->suivant;
+
         }
-        while (courant != dernier->suivant);
-        delete courant;
+        while (noeudCourant != dernier);
+
+
+        //delete courant;
         throw logic_error ("La pièce ne fait pas partie du labyrinthe");
 
 
-    }
+        }
+
+
+
+
+
+
 
 
 
