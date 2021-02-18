@@ -180,20 +180,20 @@ namespace TP1
 
         s.str("");
 
-        piece1 = trouvePiece(nomPiece1);
+        /*piece1 = trouvePiece(nomPiece1);
         piece2 = trouvePiece(nomPiece2);
 
         Porte nouvellePorte(couleur, &(piece2->piece));
         Porte nouvellePorte2(couleur, &(piece1->piece));
 
         piece1->piece.ajoutePorte(nouvellePorte);
-        piece2->piece.ajoutePorte(nouvellePorte2);
-        /*piece1 = trouvePiece(nomPiece1);
+        piece2->piece.ajoutePorte(nouvellePorte2); */
+        piece1 = trouvePiece(nomPiece1);
         piece2 = trouvePiece(nomPiece2);
 
         Porte nouvellePorte(couleur, &(piece2->piece));
 
-        piece1->piece.ajoutePorte(nouvellePorte); */
+        piece1->piece.ajoutePorte(nouvellePorte);
     }
 
 
@@ -271,12 +271,8 @@ namespace TP1
         depart->setParcourue(true);
         fileDePieces.push(*depart);
 
-
-
         do
         {
-
-
             //Étape 2.2 Vérification 1
             for (Porte const &porte : fileDePieces.front().getPortes())
             {
@@ -286,13 +282,16 @@ namespace TP1
                     porte.getDestination()->setDistanceDuDebut(fileDePieces.front().getDistanceDuDebut() + 1);
                     fileDePieces.push(*(porte.getDestination()));
                 }
+
             }
+
             //Vérification 2 cherche les portes dans les listes de portes de
             // toutes les pièces pour voir s'il y en aurait qui mènent à la pièce défilée
+
             NoeudListePieces *noeud = dernier;
+
             do
             {
-                noeud = noeud->suivant;
                 if (!noeud->piece.getParcourue())
                 {
                     for (Porte const &porte: noeud->piece.getPortes())
@@ -305,15 +304,17 @@ namespace TP1
                         }
                     }
                 }
+                noeud = noeud->suivant;
 
-
-            } while (noeudCourrant != (dernier));
-
+            } while (noeud != (dernier));
             fileDePieces.pop();
 
 
+
+
+
+
         } while (!fileDePieces.empty() && !arrivee->getParcourue());
-        cout << arrivee->getDistanceDuDebut()<< endl;
         return arrivee->getDistanceDuDebut();
 
 
