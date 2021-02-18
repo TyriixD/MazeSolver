@@ -25,10 +25,11 @@ namespace TP1
 
     }
 
-    Piece::Piece(const Piece &source): parcourue(source.parcourue),
-                                        nom(source.nom),
-                                        portes(source.portes),
-                                        distanceDuDebut(source.distanceDuDebut) {
+    Piece::Piece(const Piece &source) {
+        parcourue =source.parcourue;
+        nom = source.nom;
+        portes = source.portes;
+        distanceDuDebut = source.distanceDuDebut;
 
     }
 
@@ -74,12 +75,8 @@ namespace TP1
 
     void Piece::ajoutePorte(const Porte &p) {
         portes.push_back(p);
-
     }
-    Piece* Piece::clone() const{
-        return new Piece(*this);
 
-    }
 
     bool Piece::operator==(const Piece &source) {
         bool valeurDeRetour;
