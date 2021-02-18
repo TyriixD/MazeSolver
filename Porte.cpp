@@ -19,16 +19,15 @@ namespace TP1
 
     }
 
-    Porte::Porte(const Couleur& c, Piece *d): color(c), destination(d){
+    Porte::Porte(const Couleur& c, Piece *d){
+        color = c;
+        destination = d;
 
     }
 
     Porte::Porte(const Porte & p_porte) {
         color = p_porte.color;
-        Piece pieceCopie = *(p_porte.destination); // On vient chercher la valeur de du pointeur piece
-        Piece * pointeurCopie; //
-        pointeurCopie = pieceCopie.clone(); //Créer un espace mémoire pour la nouvelle destination
-        destination = pointeurCopie; // Assigne le pointeur Piece à la destination
+        destination = p_porte.destination;
 
     }
 
@@ -38,11 +37,8 @@ namespace TP1
 
     const Porte &Porte::operator=(const Porte &source) {
         if (this != &source){
-            delete destination;
-            Porte copieDePorte(source);
-            destination = copieDePorte.getDestination();
-            color = copieDePorte.getCouleur();
-            delete source.destination;
+            destination = source.destination;
+            color = source.color;
         }
         return *this;
     }

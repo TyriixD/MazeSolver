@@ -208,9 +208,9 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
             noeud->suivant = dernier->suivant;
             dernier->suivant = noeud;
         }
-        else {
+        /*else {
             delete noeud;
-        }
+        } */
     }
 
     Labyrinthe::Labyrinthe() {
@@ -239,32 +239,63 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
     }
 
     int Labyrinthe::solutionner(Couleur joueur) {
+
+        NoeudListePieces *noeudCourrant = dernier;
+        do{
+            noeudCourrant->piece.setParcourue(false);
+            noeudCourrant->piece.setDistanceDuDebut(-1);
+            noeudCourrant = noeudCourrant->suivant;
+
+        }while(noeudCourrant != (dernier));
+
       queue<Piece> fileDePieces;
+        //Étape 1
       depart->setDistanceDuDebut(0);
+      depart->setParcourue(true);
       fileDePieces.push(*depart);
 
+      do{
 
-      list<Porte>:: const_iterator iterateur;
-      while(!fileDePieces.empty()){
-          Piece pieceCourante = fileDePieces.front();
-          fileDePieces.pop();
 
-          for (iterateur = pieceCourante.getPortes().begin(); iterateur != pieceCourante.getPortes().end(); ++iterateur){
-              if (iterateur->getCouleur() == joueur && !iterateur->getDestination()->getParcourue() && *(iterateur->getDestination()) == pieceCourante) {
-                  iterateur->getDestination()->setParcourue(true);
-                  iterateur->getDestination()->setDistanceDuDebut(pieceCourante.getDistanceDuDebut() +1);
-                  fileDePieces.push(*(iterateur->getDestination()));
-
+            //Étape 2.2 Vérification 1
+          for (Porte const &porte : fileDePieces.front().getPortes()){
+              if (porte.getCouleur() == joueur && !porte.getDestination()->getParcourue()) {
+                  porte.getDestination()->setParcourue(true);
+                  porte.getDestination()->setDistanceDuDebut(fileDePieces.front().getDistanceDuDebut() +1);
+                  fileDePieces.push(*(porte.getDestination()));
+              }
+          }
+          //Vérification 2 cherche les portes dans les listes de portes de
+          // toutes les pièces pour voir s'il y en aurait qui mènent à la pièce défilée
+          NoeudListePieces *noeud = dernier;
+          do{
+              noeud = noeud->suivant;
+              if (!noeud->piece.getParcourue()){
+                  for (Porte const &porte: noeud->piece.getPortes()) {
+                      if (porte.getCouleur() == joueur && porte.getDestination()->getParcourue()) {
+                          noeud->piece.setParcourue(true);
+                          noeud->piece.setDistanceDuDebut(porte.getDestination()->getDistanceDuDebut() + 1);
+                          fileDePieces.push(noeud->piece);
+                      }
+                  }
               }
 
-          }
-      }
+
+          }while(noeudCourrant != (dernier));
+
+          fileDePieces.pop();
+
+
+        }
+       while(!fileDePieces.empty() && !arrivee->getParcourue());
+       cout << arrivee->getDistanceDuDebut();
         return arrivee->getDistanceDuDebut();
 
 
     }
 
     Couleur Labyrinthe::trouveGagnant() {
+        //TODO gèrer les égalités, voir note du TP
        int bleu = solutionner(Bleu);
        int rouge = solutionner(Rouge);
        int jaune =solutionner(Jaune);
@@ -309,14 +340,14 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 
     void Labyrinthe::placeDepart(const string &nom) {
         NoeudListePieces* noeudDepieceCherche =  trouvePiece(nom);
-        depart = &(noeudDepieceCherche->piece);
+        depart = &noeudDepieceCherche->piece;
 
 
     }
 
     void Labyrinthe::placeArrivee(const string &nom) {
         NoeudListePieces* noeudDepieceCherche =  trouvePiece(nom);
-        arrivee = &(noeudDepieceCherche->piece);
+        arrivee = &noeudDepieceCherche->piece;
 
 
         }
