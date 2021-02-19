@@ -223,8 +223,8 @@ namespace TP1
 
     Labyrinthe::Labyrinthe(const Labyrinthe &source)
     {
-        copieListeDesPieces((const NoeudListePieces *&) source);
-        copieLesPorteDansTouteLesPieces((const NoeudListePieces *&) source);
+        copieListeDesPieces((NoeudListePieces *&) source);
+        copieLesPorteDansTouteLesPieces((NoeudListePieces *&) source);
         dernier = source.dernier;
         depart = source.depart;
         arrivee = source.arrivee;
@@ -242,8 +242,8 @@ namespace TP1
         if (this != &source)
         {
             effacerListeDePiece();
-            copieListeDesPieces((const NoeudListePieces *&) source);
-            copieLesPorteDansTouteLesPieces((const NoeudListePieces *&) source);
+            copieListeDesPieces((NoeudListePieces *&) source);
+            copieLesPorteDansTouteLesPieces((NoeudListePieces *&) source);
             dernier = source.dernier;
             depart = source.depart;
             arrivee = source.arrivee;
@@ -425,9 +425,9 @@ namespace TP1
 
 
 
-    void Labyrinthe::copieListeDesPieces(const Labyrinthe::NoeudListePieces *&source)
+    void Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
     {
-        NoeudListePieces *noeudCourant = const_cast<NoeudListePieces *>(source);
+        NoeudListePieces *noeudCourant = source;
         do
         {
             ajoutePieceLabyrinthe(source->piece);
@@ -437,9 +437,9 @@ namespace TP1
 
     }
 
-    void Labyrinthe::copieLesPorteDansTouteLesPieces(const Labyrinthe::NoeudListePieces *&source)
+    void Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
     {
-        NoeudListePieces *noeudCourant = const_cast<NoeudListePieces *>(source);
+        NoeudListePieces *noeudCourant = source;
         do
         {
             NoeudListePieces *noeudQuonAjouteListPorte = trouvePiece(noeudCourant->piece.getNom());

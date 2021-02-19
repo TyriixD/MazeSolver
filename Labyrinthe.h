@@ -128,8 +128,8 @@ private:
 			// Le noeud suivant
 			NoeudListePieces *suivant;
 	};
-    void copieListeDesPieces(const NoeudListePieces* &source);
-    void copieLesPorteDansTouteLesPieces(const NoeudListePieces* &source);
+    void copieListeDesPieces(NoeudListePieces* &source);
+    void copieLesPorteDansTouteLesPieces(NoeudListePieces* &source);
 
 
 	//Méthode privée. Retourne l'adresse du noeud de la liste de pièces contenue dans le labyrinthe
