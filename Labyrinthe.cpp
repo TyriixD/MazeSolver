@@ -232,6 +232,7 @@ namespace TP1
     }
 
     Labyrinthe::Labyrinthe(const Labyrinthe &source)
+    //TODO Copie en profondeur
     {
         dernier = source.dernier;
         depart = source.depart;
@@ -240,6 +241,7 @@ namespace TP1
     }
 
     Labyrinthe::~Labyrinthe()
+    //TODO faire le destructeur
     {}
 
     const Labyrinthe &Labyrinthe::operator=(const Labyrinthe &source)
@@ -322,7 +324,6 @@ namespace TP1
 
     Couleur Labyrinthe::trouveGagnant()
     {
-        //TODO gèrer les égalités, voir note du TP
         int bleu = solutionner(Bleu);
         int rouge = solutionner(Rouge);
         int jaune = solutionner(Jaune);
@@ -331,26 +332,26 @@ namespace TP1
 
         int cheminPlusCourt =-1;
 
-        if (bleu != -1)
+        if (jaune != -1)
+        {
+            cheminPlusCourt = jaune;
+            couleurDuGagnant = Jaune;
+        }
+
+        if (bleu != -1 && (bleu <= cheminPlusCourt || cheminPlusCourt == -1))
         {
             cheminPlusCourt = bleu;
             couleurDuGagnant = Bleu;
         }
 
-        if (rouge != -1 && (rouge <= cheminPlusCourt || cheminPlusCourt == -1))
-        {
-            cheminPlusCourt = rouge;
-            couleurDuGagnant = Rouge;
-        }
-
-        if (jaune != -1 && (jaune <= cheminPlusCourt || cheminPlusCourt == -1))
-        {
-            cheminPlusCourt = jaune;
-            couleurDuGagnant = Jaune;
-        }
         if (vert != -1 && (vert <= cheminPlusCourt || cheminPlusCourt == -1))
         {
+            cheminPlusCourt = vert;
             couleurDuGagnant = Vert;
+        }
+        if (rouge != -1 && (rouge <= cheminPlusCourt || cheminPlusCourt == -1))
+        {
+            couleurDuGagnant = Rouge;
         }
         return couleurDuGagnant;
 
