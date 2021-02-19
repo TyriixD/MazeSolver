@@ -332,7 +332,7 @@ namespace TP1
 /**
  * \fn	Couleur Labyrinthe::trouveGagnant()
  * \brief Trouve le gagnant du labyrinthe (celui avec le plus petit nombre de deplacement requis)
- * \return Couleur la couleur du joueur qui est gagnant
+ * \return Couleur la couleur du joueur qui est gagnant, s'il y a egalite, la priorite est comme ci rouge>vert>bleu>jaune
  */
     Couleur Labyrinthe::trouveGagnant()
     {
@@ -368,7 +368,12 @@ namespace TP1
         return couleurDuGagnant;
 
     }
-
+/**
+ * \fn	Labyrinthe::appartient(const Piece &p) const
+ * \brief Verifie si la piece appartient au labyrinthe
+ * \param[in]p p la piece que l'on veut savoir si elle est dans la labyrinthe
+ * \return Bool true si oui, false autrement
+ */
     bool Labyrinthe::appartient(const Piece &p) const
     {
         bool valeurDeRetour = false;
@@ -388,7 +393,11 @@ namespace TP1
 
 
     }
-
+/**
+ * \fn	Labyrinthe::placeDepart(const string &nom)
+ * \brief Mutateur pour l'attribut depart, on va chercher le noeud avec le nom donnee en parametre et on assigne l'attribut a ce noeud
+ * \param[in]nom nom le nom de la piece qui sera le depart de notre labyrinthe
+ */
     void Labyrinthe::placeDepart(const string &nom)
     {
         NoeudListePieces *noeudDepieceCherche = trouvePiece(nom);
@@ -396,7 +405,11 @@ namespace TP1
 
 
     }
-
+/**
+ * \fn	Labyrinthe::placeArrivee(const string &nom)
+ * \brief Mutateur pour l'attribut arrive, on va chercher le noeud avec le nom donnee en parametre et on assigne l'attribut a ce noeud
+ * \param[in]nom nom le nom de la piece qui sera l'arrive de notre labyrinthe
+ */
     void Labyrinthe::placeArrivee(const string &nom)
     {
         NoeudListePieces *noeudDepieceCherche = trouvePiece(nom);
@@ -404,7 +417,12 @@ namespace TP1
 
 
     }
-
+/**
+ * \fn	Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(const string &nom) const
+ * \brief trouve le noeud de la piece donnee en parametre
+ * \param[in]nom nom la piece que l'on veut trouver
+ * \return NoeudListePieces le noeud de la piece cherche
+ */
     Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(const string &nom) const
     {
         if (nom == "")
@@ -428,7 +446,10 @@ namespace TP1
 
 
     }
-
+/**
+ * \fn	Labyrinthe::effacerListeDePiece()
+ * \brief efface toutes les noeud du labyrinthe
+ */
     void Labyrinthe::effacerListeDePiece()
     {
         NoeudListePieces *noeudCourant = dernier;
@@ -444,7 +465,11 @@ namespace TP1
 
 
 
-
+/**
+ * \fn	Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
+ * \brief Fait une copie de chaque noeud du labyrinthe que l'on passe en parametre
+ * \param[in]source le dernier noeud du labyrinthe que l'on veut copier les pieces
+ */
     void Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
     {
         NoeudListePieces *noeudCourant = source;
@@ -456,7 +481,11 @@ namespace TP1
         } while (noeudCourant != source);
 
     }
-
+/**
+ * \fn	Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
+ * \brief Fait une copie chaque liste de piece du labyrinthe que l'on veut copier
+ * \param[in]source le dernier noeud du labyrinthe que l'on veut copier les pieces
+ */
     void Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
     {
         NoeudListePieces *noeudCourant = source;
