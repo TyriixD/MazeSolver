@@ -1,7 +1,7 @@
 /**
  * \file Labyrinthe.cpp
  * \brief Le code des méthodes membres et privés de la classe Labyrinthe.
- * \author IFT-2008, Étudiant(e)
+ * \author IFT-2008, Maï-Anh Porlier
  * \version 0.1
  * \date février 2021
  * 
@@ -212,7 +212,9 @@ namespace TP1
         }
 
     }
-
+/**
+ * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
+ */
     Labyrinthe::Labyrinthe()
     {
         dernier = 0;
@@ -220,7 +222,10 @@ namespace TP1
         arrivee = 0;
 
     }
-
+/**
+ * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
+ * \param[in]source Le labyrinthe que l'on veut copier
+ */
     Labyrinthe::Labyrinthe(const Labyrinthe &source)
     {
         copieListeDesPieces((NoeudListePieces *&) source);
@@ -230,13 +235,19 @@ namespace TP1
         arrivee = source.arrivee;
 
     }
-
+/**
+ * \brief Destructeur du labyrinthe, il parcourt le labyrinthe et detruit tout les noeuds
+ */
     Labyrinthe::~Labyrinthe()
     {
         effacerListeDePiece();
 
     }
-
+/**
+ * \brief Surcharge de l'operateur d'assignation
+ * \param[in]source le Labyrinthe que l'ont veut prendre les valeurs et les assigner a notre labyrinthe courant
+ * \return Un labyrinthe avec des nouvelles valeurs
+ */
     const Labyrinthe &Labyrinthe::operator=(const Labyrinthe &source)
     {
         if (this != &source)
@@ -250,7 +261,12 @@ namespace TP1
         }
         return *this;
     }
-
+/**
+ * \fn	Labyrinthe::solutionner(Couleur joueur)
+ * \brief Trouve le nombre de deplacement requis pour resoudre le labyrinthe pour un certain joueur donnee
+ * \param[in] joueur Le joueur que l'on veut resoudre le labyrinthe
+ * \return int le nombre de deplacement requis pour arrive a la fin du labyrinthe
+ */
     int Labyrinthe::solutionner(Couleur joueur)
     {
 
@@ -313,7 +329,11 @@ namespace TP1
 
 
     }
-
+/**
+ * \fn	Couleur Labyrinthe::trouveGagnant()
+ * \brief Trouve le gagnant du labyrinthe (celui avec le plus petit nombre de deplacement requis)
+ * \return Couleur la couleur du joueur qui est gagnant
+ */
     Couleur Labyrinthe::trouveGagnant()
     {
         int bleu = solutionner(Bleu);
