@@ -222,8 +222,9 @@ namespace TP1
     }
 
     Labyrinthe::Labyrinthe(const Labyrinthe &source)
-    //TODO Copie en profondeur
     {
+        copieListeDesPieces((const NoeudListePieces *&) source);
+        copieLesPorteDansTouteLesPieces((const NoeudListePieces *&) source);
         dernier = source.dernier;
         depart = source.depart;
         arrivee = source.arrivee;
@@ -241,12 +242,8 @@ namespace TP1
         if (this != &source)
         {
             effacerListeDePiece();
-
-
-            NoeudListePieces *noeudSourceCourant = dernier;
-
-
-
+            copieListeDesPieces((const NoeudListePieces *&) source);
+            copieLesPorteDansTouteLesPieces((const NoeudListePieces *&) source);
             dernier = source.dernier;
             depart = source.depart;
             arrivee = source.arrivee;
@@ -428,9 +425,9 @@ namespace TP1
 
 
 
-    void Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
+    void Labyrinthe::copieListeDesPieces(const Labyrinthe::NoeudListePieces *&source)
     {
-        NoeudListePieces *noeudCourant = source;
+        NoeudListePieces *noeudCourant = const_cast<NoeudListePieces *>(source);
         do
         {
             ajoutePieceLabyrinthe(source->piece);
@@ -440,14 +437,17 @@ namespace TP1
 
     }
 
-    void Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
+    void Labyrinthe::copieLesPorteDansTouteLesPieces(const Labyrinthe::NoeudListePieces *&source)
     {
-        NoeudListePieces *noeudCourant = source;
-        NoeudListePieces *noeudQuonAjouteListPorte;
+        NoeudListePieces *noeudCourant = const_cast<NoeudListePieces *>(source);
         do
         {
             NoeudListePieces *noeudQuonAjouteListPorte = trouvePiece(noeudCourant->piece.getNom());
-            //noeudQuonAjouteListPorte->piece.getPortes() = noeudCourant->piece.getPortes();
+
+            for (Porte porte: noeudCourant->piece.getPortes()){
+                noeudQuonAjouteListPorte->piece.ajoutePorte(porte);
+            }
+
             noeudCourant = noeudCourant->suivant;
 
         } while (noeudCourant != source);
