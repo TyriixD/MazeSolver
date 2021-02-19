@@ -91,7 +91,7 @@ public:
 	//accordez la priorité au joueur rouge, puis au joueur vert, puis au bleu, puis au jaune. Par exemple,
 	// si le joueur rouge peut solutionner le labyrinthe en 12 coups, le joueur vert en 8 coups, le joueur bleu en 9
 	// coups, puis le jaune en 8 coups aussi, c'est le vert qui gagne.
-	Couleur trouveGagnant(); //TODO
+	Couleur trouveGagnant();
 
 	//Accesseur pour le membre depart
 	Piece* getDepart() const {return depart;}
@@ -100,9 +100,13 @@ public:
 	Piece*  getArrivee() const {return arrivee;}
 
 	//Vérifie si une pièce portant le nom de la pièce fournie se trouve dans le labyrinthe
-	bool appartient(const Piece& p) const; //TODO
+	bool appartient(const Piece& p) const;
+	void effacerListeDePiece();
+
+
 
 private:
+
 
 	//Méthode privée fournie dans le fichier Labyrinthe.cpp, elle ajoute un passage
 	//dans un labyrinthe. Elle est appelée par la méthode chargeLabyrinthe()
@@ -124,6 +128,8 @@ private:
 			// Le noeud suivant
 			NoeudListePieces *suivant;
 	};
+    void copieListeDesPieces(NoeudListePieces* &source);
+    void copieLesPorteDansTouteLesPieces(NoeudListePieces* &source);
 
 
 	//Méthode privée. Retourne l'adresse du noeud de la liste de pièces contenue dans le labyrinthe

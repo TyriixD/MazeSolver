@@ -180,14 +180,6 @@ namespace TP1
 
         s.str("");
 
-        /*piece1 = trouvePiece(nomPiece1);
-        piece2 = trouvePiece(nomPiece2);
-
-        Porte nouvellePorte(couleur, &(piece2->piece));
-        Porte nouvellePorte2(couleur, &(piece1->piece));
-
-        piece1->piece.ajoutePorte(nouvellePorte);
-        piece2->piece.ajoutePorte(nouvellePorte2); */
         piece1 = trouvePiece(nomPiece1);
         piece2 = trouvePiece(nomPiece2);
 
@@ -218,9 +210,7 @@ namespace TP1
             noeud->suivant = dernier->suivant;
             dernier->suivant = noeud;
         }
-        /*else {
-            delete noeud;
-        } */
+
     }
 
     Labyrinthe::Labyrinthe()
@@ -241,13 +231,22 @@ namespace TP1
     }
 
     Labyrinthe::~Labyrinthe()
-    //TODO faire le destructeur
-    {}
+    {
+        effacerListeDePiece();
+
+    }
 
     const Labyrinthe &Labyrinthe::operator=(const Labyrinthe &source)
     {
         if (this != &source)
         {
+            effacerListeDePiece();
+
+
+            NoeudListePieces *noeudSourceCourant = dernier;
+
+
+
             dernier = source.dernier;
             depart = source.depart;
             arrivee = source.arrivee;
@@ -312,10 +311,6 @@ namespace TP1
             fileDePieces.pop();
 
 
-
-
-
-
         } while (!fileDePieces.empty() && !arrivee->getParcourue());
         return arrivee->getDistanceDuDebut();
 
@@ -330,7 +325,7 @@ namespace TP1
         int vert = solutionner(Vert);
         Couleur couleurDuGagnant;
 
-        int cheminPlusCourt =-1;
+        int cheminPlusCourt = -1;
 
         if (jaune != -1)
         {
@@ -412,10 +407,50 @@ namespace TP1
 
         } while (noeudCourant != dernier);
 
-
-        //delete courant;
         throw logic_error("La pièce ne fait pas partie du labyrinthe");
 
+
+    }
+
+    void Labyrinthe::effacerListeDePiece()
+    {
+        NoeudListePieces *noeudCourant = dernier;
+        NoeudListePieces *noeudASupprimer;
+        do
+        {
+            noeudASupprimer = noeudCourant;
+            noeudCourant = noeudCourant->suivant;
+            delete noeudASupprimer;
+
+        } while (noeudCourant != dernier);
+    }
+
+
+
+
+    void Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
+    {
+        NoeudListePieces *noeudCourant = source;
+        do
+        {
+            ajoutePieceLabyrinthe(source->piece);
+            noeudCourant = noeudCourant->suivant;
+
+        } while (noeudCourant != source);
+
+    }
+
+    void Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
+    {
+        NoeudListePieces *noeudCourant = source;
+        NoeudListePieces *noeudQuonAjouteListPorte;
+        do
+        {
+            NoeudListePieces *noeudQuonAjouteListPorte = trouvePiece(noeudCourant->piece.getNom());
+            //noeudQuonAjouteListPorte->piece.getPortes() = noeudCourant->piece.getPortes();
+            noeudCourant = noeudCourant->suivant;
+
+        } while (noeudCourant != source);
 
     }
 
