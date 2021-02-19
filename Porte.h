@@ -20,54 +20,54 @@ namespace TP1
  * elle peut prendre 5 valeurs : Rouge, Bleu, Jaune ou Vert ainsi que la
  * valeur "Aucun" qui est une valeur spéciale utilisée dans la fonction "trouveGagnant".
  */
-typedef enum
-{
-	Rouge, Vert, Bleu, Jaune, Aucun
-} Couleur;
+    typedef enum
+    {
+        Rouge, Vert, Bleu, Jaune, Aucun
+    } Couleur;
 
 // La ligne qui suit sert à signifier au compilateur que la classe "Piece" existe.
 // On le fait, car la structure "Porte" comporte des pointeurs vers la classe "Piece", et vice versa.
-class Piece;
+    class Piece;
 
 /**
  * \class Porte
  * \brief classe qui représente une porte d'une couleur donnée entre deux pièces
  */
 
-class Porte
-{
-public:
+    class Porte
+    {
+    public:
 
-	//constructeur par défaut
-	Porte();
+        //constructeur par défaut
+        Porte();
 
-	//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-	Porte(const Couleur& c, Piece * d);
+        //Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
+        Porte(const Couleur &c, Piece *d);
 
-	//Constructeur de copie
-	Porte(const Porte&);
+        //Constructeur de copie
+        Porte(const Porte &);
 
-	//un destructeur qui ne fera rien
-	~Porte();
+        //un destructeur qui ne fera rien
+        ~Porte();
 
-	//Surcharge de l'opérateur =
-	const Porte& operator =(const Porte& source);
+        //Surcharge de l'opérateur =
+        const Porte &operator=(const Porte &source);
 
-	//Surcharge de l'opérateur ==
-	bool operator ==(const Porte& source) const;
+        //Surcharge de l'opérateur ==
+        bool operator==(const Porte &source) const;
 
-	//accesseur de la couleur d'une porte
-	Couleur getCouleur() const;
+        //accesseur de la couleur d'une porte
+        Couleur getCouleur() const;
 
-	//Accesseur de la piece de destination
-	Piece * getDestination() const;
+        //Accesseur de la piece de destination
+        Piece *getDestination() const;
 
-private:
-	Piece * destination; /*!< Vers où la porte mène.*/
-	Couleur color; /*< Couleur de la porte.*/
-	/*!< Cette couleur spécifie en même temps quel est le joueur qui a le droit de franchir cette porte.*/
+    private:
+        Piece *destination; /*!< Vers où la porte mène.*/
+        Couleur color; /*< Couleur de la porte.*/
+        /*!< Cette couleur spécifie en même temps quel est le joueur qui a le droit de franchir cette porte.*/
 
-};
+    };
 
 }
 

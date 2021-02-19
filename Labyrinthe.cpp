@@ -212,6 +212,7 @@ namespace TP1
         }
 
     }
+
 /**
  * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
  */
@@ -222,6 +223,7 @@ namespace TP1
         arrivee = 0;
 
     }
+
 /**
  * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
  * \param[in]source Le labyrinthe que l'on veut copier
@@ -235,6 +237,7 @@ namespace TP1
         arrivee = source.arrivee;
 
     }
+
 /**
  * \brief Destructeur du labyrinthe, il parcourt le labyrinthe et detruit tout les noeuds
  */
@@ -243,6 +246,7 @@ namespace TP1
         effacerListeDePiece();
 
     }
+
 /**
  * \brief Surcharge de l'operateur d'assignation
  * \param[in]source le Labyrinthe que l'ont veut prendre les valeurs et les assigner a notre labyrinthe courant
@@ -261,6 +265,7 @@ namespace TP1
         }
         return *this;
     }
+
 /**
  * \fn	Labyrinthe::solutionner(Couleur joueur)
  * \brief Trouve le nombre de deplacement requis pour resoudre le labyrinthe pour un certain joueur donnee
@@ -329,6 +334,7 @@ namespace TP1
 
 
     }
+
 /**
  * \fn	Couleur Labyrinthe::trouveGagnant()
  * \brief Trouve le gagnant du labyrinthe (celui avec le plus petit nombre de deplacement requis)
@@ -368,6 +374,7 @@ namespace TP1
         return couleurDuGagnant;
 
     }
+
 /**
  * \fn	Labyrinthe::appartient(const Piece &p) const
  * \brief Verifie si la piece appartient au labyrinthe
@@ -393,6 +400,7 @@ namespace TP1
 
 
     }
+
 /**
  * \fn	Labyrinthe::placeDepart(const string &nom)
  * \brief Mutateur pour l'attribut depart, on va chercher le noeud avec le nom donnee en parametre et on assigne l'attribut a ce noeud
@@ -405,6 +413,7 @@ namespace TP1
 
 
     }
+
 /**
  * \fn	Labyrinthe::placeArrivee(const string &nom)
  * \brief Mutateur pour l'attribut arrive, on va chercher le noeud avec le nom donnee en parametre et on assigne l'attribut a ce noeud
@@ -417,6 +426,7 @@ namespace TP1
 
 
     }
+
 /**
  * \fn	Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(const string &nom) const
  * \brief trouve le noeud de la piece donnee en parametre
@@ -446,6 +456,7 @@ namespace TP1
 
 
     }
+
 /**
  * \fn	Labyrinthe::effacerListeDePiece()
  * \brief efface toutes les noeud du labyrinthe
@@ -464,7 +475,6 @@ namespace TP1
     }
 
 
-
 /**
  * \fn	Labyrinthe::copieListeDesPieces(Labyrinthe::NoeudListePieces *&source)
  * \brief Fait une copie de chaque noeud du labyrinthe que l'on passe en parametre
@@ -481,6 +491,7 @@ namespace TP1
         } while (noeudCourant != source);
 
     }
+
 /**
  * \fn	Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
  * \brief Fait une copie chaque liste de piece du labyrinthe que l'on veut copier
@@ -493,7 +504,8 @@ namespace TP1
         {
             NoeudListePieces *noeudQuonAjouteListPorte = trouvePiece(noeudCourant->piece.getNom());
 
-            for (Porte porte: noeudCourant->piece.getPortes()){
+            for (Porte porte: noeudCourant->piece.getPortes())
+            {
                 noeudQuonAjouteListPorte->piece.ajoutePorte(porte);
             }
 
