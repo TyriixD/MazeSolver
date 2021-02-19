@@ -1,7 +1,7 @@
 /**
  * \file Piece.cpp
  * \brief Ce fichier contient une implantation des méthodes de la classe Piece
- * \author Étudiant(e)
+ * \author Mai-anh Porlier
  * \version 0.1
  * \date février 2021
  *
