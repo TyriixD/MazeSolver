@@ -504,7 +504,7 @@ namespace TP1
 
             for (Porte porte: noeudCourant->piece.getPortes())
             {
-                Porte copiePorte = ajouteCopieDePorte(porte.getCouleur(),porte.getDestination()->getNom());
+                Porte copiePorte = ajouteCopieDePorte(porte.getCouleur(), porte.getDestination()->getNom());
                 noeudQuonAjouteListPorte->piece.ajoutePorte(copiePorte);
             }
 
@@ -513,6 +513,7 @@ namespace TP1
         } while (noeudCourant != source);
 
     }
+
 /**
  * \fn	Labyrinthe::ajouteCopieDePorte(Couleur couleur, std::string nomPiece)
  * \brief Fait une copie en profondeur d'une porte. On donne la couleur et le nom de la destination de la porte copie puis on va chercher le nom dans notre lab courant
@@ -521,9 +522,9 @@ namespace TP1
     Porte Labyrinthe::ajouteCopieDePorte(Couleur couleur, std::string nomPiece)
     {
         //Prend le nom de la piece copie et va la trouver dans notre labyrinthe courant
-        NoeudListePieces* pieceLabCourant = trouvePiece(nomPiece);
+        NoeudListePieces *pieceLabCourant = trouvePiece(nomPiece);
 
-        Porte porteCopie(couleur,&(pieceLabCourant->piece));
+        Porte porteCopie(couleur, &(pieceLabCourant->piece));
         return porteCopie;
 
     }

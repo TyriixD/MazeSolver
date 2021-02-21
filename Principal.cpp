@@ -1,7 +1,7 @@
 /**
  * \file Principal.cpp
  * \brief Ce fichier contient un main pour tester le labyrinthe.
- * \author IFT-2008, Étudiant(e)
+ * \author IFT-2008, Maï-Anh Porlier
  * \version 0.1
  * \date février 2021
  * 
