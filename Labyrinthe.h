@@ -135,6 +135,8 @@ namespace TP1
         void copieListeDesPieces(NoeudListePieces *&source);
 
         void copieLesPorteDansTouteLesPieces(NoeudListePieces *&source);
+        void ajouteUnePorteEntrePieces(Couleur couleur, std::string nomPiece1, std::string nomPiece2);
+
 
 
         //Méthode privée. Retourne l'adresse du noeud de la liste de pièces contenue dans le labyrinthe

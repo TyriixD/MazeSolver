@@ -232,9 +232,8 @@ namespace TP1
     {
         copieListeDesPieces((NoeudListePieces *&) source);
         copieLesPorteDansTouteLesPieces((NoeudListePieces *&) source);
-        dernier = source.dernier;
-        depart = source.depart;
-        arrivee = source.arrivee;
+        placeDepart(source.depart->getNom());
+        placeArrivee(source.depart->getNom());
 
     }
 
@@ -259,7 +258,6 @@ namespace TP1
             effacerListeDePiece();
             copieListeDesPieces((NoeudListePieces *&) source);
             copieLesPorteDansTouteLesPieces((NoeudListePieces *&) source);
-            dernier = source.dernier;
             depart = source.depart;
             arrivee = source.arrivee;
         }
@@ -506,13 +504,21 @@ namespace TP1
 
             for (Porte porte: noeudCourant->piece.getPortes())
             {
-                noeudQuonAjouteListPorte->piece.ajoutePorte(porte);
+                ajouteUnePorteEntrePieces(porte.getCouleur(),noeudQuonAjouteListPorte->piece.getNom(),noeudQuonAjouteListPorte->piece.getNom());
             }
 
             noeudCourant = noeudCourant->suivant;
 
         } while (noeudCourant != source);
 
+    }
+
+    void Labyrinthe::ajouteUnePorteEntrePieces(Couleur couleur, std::string nomPiece1, std::string nomPiece2)
+    {
+        //Crée une nouvelle porte qui va vers la piece 2
+        Porte porteCopie(couleur,&(trouvePiece(nomPiece2)->piece));
+        //on vient ajouter cette porte a la piece 1
+        trouvePiece(nomPiece1)->piece.ajoutePorte(porteCopie);
     }
 
 
