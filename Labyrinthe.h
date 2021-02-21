@@ -31,8 +31,15 @@ namespace TP1
     {
     public:
         //Constructeur par défaut
-        Labyrinthe();
+/**
+ * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
+ */
 
+        Labyrinthe();
+/**
+ * \brief Constructeur copie du labyrinthe
+ * \param[in]source Le labyrinthe que l'on veut copier
+ */
         //constructeur de copie
         Labyrinthe(const Labyrinthe &source);
 
@@ -135,7 +142,7 @@ namespace TP1
         void copieListeDesPieces(NoeudListePieces *&source);
 
         void copieLesPorteDansTouteLesPieces(NoeudListePieces *&source);
-        void ajouteUnePorteEntrePieces(Couleur couleur, std::string nomPiece1, std::string nomPiece2);
+        Porte ajouteCopieDePorte(Couleur couleur, std::string nomPiece);
 
 
 

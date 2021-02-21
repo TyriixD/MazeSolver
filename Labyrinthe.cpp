@@ -225,7 +225,7 @@ namespace TP1
     }
 
 /**
- * \brief Constructeur par defaut du labyrinthe, initialise tout les attributs a 0
+ * \brief Constructeur copie du labyrinthe
  * \param[in]source Le labyrinthe que l'on veut copier
  */
     Labyrinthe::Labyrinthe(const Labyrinthe &source)
@@ -258,8 +258,8 @@ namespace TP1
             effacerListeDePiece();
             copieListeDesPieces((NoeudListePieces *&) source);
             copieLesPorteDansTouteLesPieces((NoeudListePieces *&) source);
-            depart = source.depart;
-            arrivee = source.arrivee;
+            placeDepart(source.depart->getNom());
+            placeArrivee(source.depart->getNom());
         }
         return *this;
     }
@@ -492,8 +492,8 @@ namespace TP1
 
 /**
  * \fn	Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
- * \brief Fait une copie chaque liste de piece du labyrinthe que l'on veut copier
- * \param[in]source le dernier noeud du labyrinthe que l'on veut copier les pieces
+ * \brief Fait une copie chaque liste de porte que l'on veut copier avec la destination du labyrinthe courant
+ * \param[in]source le dernier noeud du labyrinthe que l'on veut copier les portes
  */
     void Labyrinthe::copieLesPorteDansTouteLesPieces(Labyrinthe::NoeudListePieces *&source)
     {
@@ -504,7 +504,8 @@ namespace TP1
 
             for (Porte porte: noeudCourant->piece.getPortes())
             {
-                ajouteUnePorteEntrePieces(porte.getCouleur(),noeudQuonAjouteListPorte->piece.getNom(),noeudQuonAjouteListPorte->piece.getNom());
+                Porte copiePorte = ajouteCopieDePorte(porte.getCouleur(),porte.getDestination()->getNom());
+                noeudQuonAjouteListPorte->piece.ajoutePorte(copiePorte);
             }
 
             noeudCourant = noeudCourant->suivant;
@@ -512,14 +513,22 @@ namespace TP1
         } while (noeudCourant != source);
 
     }
-
-    void Labyrinthe::ajouteUnePorteEntrePieces(Couleur couleur, std::string nomPiece1, std::string nomPiece2)
+/**
+ * \fn	Labyrinthe::ajouteCopieDePorte(Couleur couleur, std::string nomPiece)
+ * \brief Fait une copie en profondeur d'une porte. On donne la couleur et le nom de la destination de la porte copie puis on va chercher le nom dans notre lab courant
+ * \param[in] nomPiece Le nom de la piece qui va etre la destination de la porte copie
+ */
+    Porte Labyrinthe::ajouteCopieDePorte(Couleur couleur, std::string nomPiece)
     {
-        //Crée une nouvelle porte qui va vers la piece 2
-        Porte porteCopie(couleur,&(trouvePiece(nomPiece2)->piece));
-        //on vient ajouter cette porte a la piece 1
-        trouvePiece(nomPiece1)->piece.ajoutePorte(porteCopie);
+        //Prend le nom de la piece copie et va la trouver dans notre labyrinthe courant
+        NoeudListePieces* pieceLabCourant = trouvePiece(nomPiece);
+
+        Porte porteCopie(couleur,&(pieceLabCourant->piece));
+        return porteCopie;
+
     }
+
+
 
 
 
